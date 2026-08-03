@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nurloqmanhakim</title>
+    <meta name="description"
+        content="Loqman Hakim — a developer and graphic designer crafting digital experiences at the intersection of code and creativity.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <base target="_blank">
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo" target="_self">nloqmanhn.</a>
+        <ul class="nav-links">
+            <li><a href="#about" target="_self">About</a></li>
+            <li><a href="#projects" target="_self">Projects</a></li>
+            <li><a href="#contact" target="_self">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+
+        <div class="hero-content">
+            <!-- Typewriter row -->
+            <div class="job-role-container">
+                <h2 class="typewriter-text" id="typewriter" aria-live="polite">Hi! I am </h2>
+            </div>
+
+            <!-- Main name -->
+            <h1 id="scroll-title">LOQMAN HAKIM</h1>
+        </div>
+
+        <!-- Waving gif — sits at the bottom of the hero -->
+        <aside class="bottom-gif" aria-hidden="true">
+            <img src="assets/wavingDude.gif" alt="Waving character" class="hero-dude">
+        </aside>
+
+    </section>
+
+    <!-- Scroll Down — fixed right side indicator -->
+    <div class="scroll-down-text" id="scroll-indicator-wave" aria-hidden="true">
+        <span class="scroll-arrow-icon">↓</span>
+        <div class="scroll-words">
+            <span class="scroll-word">Scroll</span>
+            <span class="scroll-word">Down</span>
+        </div>
+    </div>
+
+    <!-- ===== DARK SECTIONS ===== -->
+    <div class="dark-sections">
+
+        <section id="about" class="reveal">
+            <div class="section-label">About</div>
+            <h2 class="section-title">I build things and make them look good.</h2>
+            <p class="about-text">
+                I'm a <strong>Frontend Dev</strong> and <strong>graphic designer</strong> who loves crafting digital
+                experiences that are both functional and visually striking. I sit at the intersection of code and
+                creativity by turning ideas into clean interfaces, thoughtful interactions, and memorable designs.
+            </p>
+        </section>
+
+        <section id="projects" class="reveal projects-accordion-section">
+            <div class="projects-header-block">
+                <h2 class="projects-main-title">My Projects</h2>
+                <p class="projects-subtitle">Dabbling in anything and everything I find interesting. Explore my vision!
+                </p>
+            </div>
+
+            <div class="accordion-container">
+
+                <!-- Category 1: Programming -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span class="accordion-title">Programming</span>
+                        <span class="accordion-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div class="projects-grid engineering-grid">
+
+                                <a href="https://github.com/nloqmanhn05/NexusLab" class="project-card">
+                                    <span class="view-repo-btn">View Repo</span>
+                                    <div class="project-thumb">
+                                        <img src="assets/projects/nexuslab.jpg">
+                                        <div class="project-overlay">
+                                            <div class="project-title">NexusLab</div>
+                                            <div class="project-desc">Object Oriented Java Programming with question,
+                                                hint, solution and custom IDE that help you to practice.</div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a href="https://github.com/nloqmanhn05/Nudge" class="project-card">
+                                    <span class="view-repo-btn">View Repo</span>
+                                    <div class="project-thumb">
+                                        <img src="assets/projects/nudge.jpg">
+                                        <div class="project-overlay">
+                                            <div class="project-title">Nudge</div>
+                                            <div class="project-desc">Your assitant that help you to manage your buy now
+                                                pay later service. </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a href="https://github.com/nloqmanhn05/Fintech" class="project-card">
+                                    <span class="view-repo-btn">View Repo</span>
+                                    <div class="project-thumb">
+                                        <img src="assets/projects/FinTech.jpg">
+                                        <div class="project-overlay">
+                                            <div class="project-title">Fintech </div>
+                                            <div class="project-desc">A smart POS system with intergrating AI(Akira)
+                                                that help you to managed your business. </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 2: Design -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span class="accordion-title">Design</span>
+                        <span class="accordion-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div class="projects-grid">
+
+                                <div class="project-card">
+                                    <div class="project-thumb">
+                                        <img src="assets/design/FPJB.png">
+                                    </div>
+                                </div>
+
+                                <div class="project-card">
+                                    <div class="project-thumb">
+                                        <img src="assets/design/ELEVATE SISWA.png">
+                                    </div>
+                                </div>
+
+                                <div class="project-card">
+                                    <div class="project-thumb">
+                                        <img src="assets/design/POSTER TURKIYE.png">
+                                    </div>
+                                </div>
+
+                                <div class="project-card">
+                                    <div class="project-thumb">
+                                        <img src="assets/design/The Garden of Attraction.png">
+                                    </div>
+                                </div>
+
+                                <div class="project-card">
+                                    <div class="project-thumb">
+                                        <img src="assets/design/two of us.png">
+                                    </div>
+                                </div>
+
+                                <div class="project-card">
+                                    <div class="project-thumb">
+                                        <img src="assets/design/mock.png">
+                                    </div>
+                                </div>
+
+                                <div class="project-card">
+                                    <div class="project-thumb">
+                                        <img src="assets/design/4.png">
+                                    </div>
+                                </div>
+
+                                <div class="project-card">
+                                    <div class="project-thumb">
+                                        <img src="assets/design/PHOTOSHOP.png">
+                                    </div>
+                                </div>
+
+                                <div class="project-card">
+                                    <div class="project-thumb">
+                                        <img src="assets/design/Untitled-1.png">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Full Portfolio card — same hover behavior as programming cards -->
+                            <div class="portfolio-card-wrap">
+                                <a href="https://www.figma.com/deck/kq56kSE4hnbNcSnfnWdeD7" target="_blank"
+                                    class="project-card portfolio-card">
+                                    <span class="view-repo-btn">See my portfolio</span>
+                                    <div class="project-thumb">
+                                        <img src="assets/1.png" alt="Full portfolio preview">
+                                        <div class="project-overlay">
+                                            <div class="project-title">Full Portfolio</div>
+                                            <div class="project-desc">Explore the complete collection of my design work.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="resume-button-wrap">
+                <a href="https://drive.google.com/file/d/1R1M-jrsdhLuaFiqBy3jIoG112PTbkG3q/view?usp=sharing"
+                    target="_blank" class="resume-btn">See my resume</a>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal">
+            <div class="section-label">Get in Touch</div>
+            <h2 class="section-title">Let's work together.</h2>
+            <div class="contact-content">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nloqmanhn@gmail.com" class="contact-email"
+                    target="_blank">nloqmanhn@gmail.com</a>
+                <div class="socials">
+                    <a href="https://github.com/nloqmanhn05">GitHub</a>
+                    <a href="https://www.linkedin.com/in/nurloqmanhakim/">LinkedIn</a>
+                    <a href="https://www.tiktok.com/@rekastudiolabs?_r=1&_t=ZS-98YVv2s4AwW">TikTok</a>
+
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 Nur Loqman Hakim. All right reserved.
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

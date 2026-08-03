@@ -1,0 +1,998 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --text: #f0f0f0;
+    --text-dim: #888888;
+    --accent: #c4b5a0;
+    --font-primary: 'Space Grotesk', sans-serif;
+    --color-black: #111111;
+}
+
+html {
+    scroll-behavior: smooth;
+    width: 100%;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE / old Edge */
+}
+
+html::-webkit-scrollbar {
+    display: none;
+    /* Chrome / Safari / new Edge */
+}
+
+body {
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: #ffffff;
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body.scroll-locked {
+    overflow: hidden !important;
+    height: 100vh !important;
+    touch-action: none;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: background 0.5s ease, backdrop-filter 0.5s ease;
+}
+
+.nav-logo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    transition: color 0.4s ease;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    position: relative;
+    transition: color 0.4s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Nav on white hero (default) */
+.navbar .nav-logo,
+.navbar .nav-links a {
+    color: #111;
+}
+
+.navbar .nav-links a::after {
+    background: #111;
+}
+
+/* Nav on dark sections (scrolled) */
+.navbar.nav-scrolled {
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(12px);
+}
+
+.navbar.nav-scrolled .nav-logo,
+.navbar.nav-scrolled .nav-links a {
+    color: var(--text);
+}
+
+.navbar.nav-scrolled .nav-links a::after {
+    background: var(--text);
+}
+
+/* ============================================================
+   HERO — WHITE SECTION (full viewport)
+   ============================================================ */
+.hero {
+    min-height: 100vh;
+    width: 100%;
+    background: #ffffff;
+    ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    padding: 2rem 2rem 0;
+    overflow: hidden;
+}
+
+/* Hero content wrapper fades up on load */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    padding-bottom: 2rem;
+}
+
+/* ---- Typewriter + Drop Zone row ---- */
+.job-role-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.typewriter-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1rem, 1.1rem + 3vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #111111;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    min-height: 1.2em;
+}
+
+.typewriter-text::after {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 0.85em;
+    background-color: #111111;
+    margin-left: 6px;
+    border-radius: 2px;
+    animation: blinkSmooth 0.8s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+/* When typewriter is stopped */
+.typewriter-text.stopped::after {
+    display: none;
+}
+
+@keyframes blinkSmooth {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+
+    50% {
+        opacity: 0.15;
+        transform: scaleY(0.88);
+    }
+}
+
+
+/* ---- Main scroll title ---- */
+#scroll-title {
+    font-size: clamp(1.8rem, 6.2vw, 5.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #111111;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), font-size 0.4s ease;
+    will-change: opacity, transform;
+    max-width: 95vw;
+}
+
+#scroll-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---- Waving GIF — absolute bottom of hero ---- */
+.bottom-gif {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-dude {
+    width: clamp(170px, 22vw, 310px);
+    height: auto;
+    display: block;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-dude.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================================
+   SCROLL DOWN TEXT — fixed right side, wave animation
+   ============================================================ */
+.scroll-down-text {
+    position: fixed;
+    right: 2.5rem;
+    bottom: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 400;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+.scroll-down-text.visible {
+    opacity: 1;
+}
+
+.scroll-down-text.hidden {
+    opacity: 0 !important;
+    transition: opacity 0.4s ease;
+}
+
+.scroll-arrow-icon {
+    font-size: 1.1rem;
+    color: #888;
+    display: inline-block;
+    animation: bounceDown 2s ease-in-out infinite;
+}
+
+.scroll-words {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.scroll-word {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: #888;
+    text-transform: uppercase;
+    display: block;
+}
+
+@keyframes bounceDown {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+}
+
+/* ============================================================
+   CATEGORY CHIPS — white zone just below the hero
+   ============================================================ */
+.categorySelect {
+    background: var(--bg);
+    padding: 2.5rem 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards 1.4s;
+}
+
+.chips-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+}
+
+.chips-row {
+    display: flex;
+    justify-content: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+}
+
+.draggable-item {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: clamp(0.88rem, 1.4vw, 1.08rem);
+    color: var(--text);
+    cursor: grab;
+    padding: 0.35rem 0.4rem;
+    border-radius: 2px;
+    transition: transform 0.25s ease, color 0.2s ease, opacity 0.2s ease;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.draggable-item:hover {
+    transform: translateY(-5px);
+    color: var(--accent);
+}
+
+.draggable-item:active,
+.draggable-item:focus {
+    cursor: grabbing;
+    outline: none;
+}
+
+.draggable-item.dragging {
+    opacity: 0.25;
+    transform: scale(0.93);
+}
+
+.draggable-item .bracket {
+    color: var(--text-dim);
+    transition: color 0.2s ease;
+}
+
+.draggable-item:hover .bracket {
+    color: var(--accent);
+}
+
+/* ============================================================
+   DARK SECTIONS
+   ============================================================ */
+.dark-sections {
+    background: var(--bg);
+    position: relative;
+}
+
+.dark-sections::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+section {
+    padding: 8rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+}
+
+/* About */
+.about-text {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 300;
+    color: var(--text-dim);
+    max-width: 700px;
+    line-height: 1.7;
+}
+
+.about-text strong {
+    color: var(--text);
+    font-weight: 500;
+}
+
+/* Projects */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+    max-width: 1000px;
+    margin: 2.5rem auto 0;
+    padding: 0 2rem;
+}
+
+.project-card {
+    background: var(--surface);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.project-thumb {
+    width: 100%;
+    aspect-ratio: 4/5;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.project-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 55%;
+    padding: 1.5rem 1.25rem 1.25rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 0) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.project-overlay .project-title {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.project-overlay .project-desc {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ============================================================
+   ENGINEERING / PROGRAMMING CARDS + PORTFOLIO CARD —
+   "VIEW REPO" / "SEE MY PORTFOLIO" hover badge that follows cursor
+   ============================================================ */
+
+/* Proper cursor for engineering/programming cards and the portfolio card */
+.engineering-grid .project-card,
+.portfolio-card {
+    cursor: pointer;
+}
+
+.view-repo-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+
+    background: #ffffff;
+    color: #111111;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    padding: 0.55rem 1.3rem;
+    border-radius: 9999px;
+    border: 1.5px solid #111111;
+
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+
+    transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
+
+    white-space: nowrap;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.engineering-grid .project-card:hover .view-repo-btn,
+.portfolio-card:hover .view-repo-btn {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    background: #ffffff;
+}
+
+/* Design cards (default .projects-grid, no .engineering-grid) never get
+   the badge, except the standalone .portfolio-card which opts back in */
+.projects-grid:not(.engineering-grid) .view-repo-btn {
+    display: none;
+}
+
+.portfolio-card .view-repo-btn {
+    display: block;
+}
+
+/* ============================================================
+   PORTFOLIO CARD — full-width design-grid replacement,
+   inset width, centered, same hover mechanic as programming cards
+   ============================================================ */
+.portfolio-card-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.portfolio-card {
+    width: 66.66%;
+}
+
+.portfolio-card .project-thumb {
+    aspect-ratio: 21 / 6;
+}
+
+/* Contact */
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-email {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.3s;
+}
+
+.contact-email:hover {
+    color: var(--accent);
+}
+
+.socials {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.socials a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.socials a:hover {
+    color: var(--text);
+}
+
+/* Footer */
+footer {
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes waveLetter {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================================
+   RESPONSIVE / MOBILE
+   ============================================================ */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+
+    .scroll-down-text {
+        right: 1rem;
+    }
+
+    #scroll-title {
+        white-space: normal;
+        font-size: clamp(2.4rem, 12vw, 4rem);
+    }
+
+    .job-role-container {
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    section {
+        padding: 5rem 1.5rem;
+    }
+
+    .accordion-header {
+        padding: 2rem 1rem;
+    }
+
+    .accordion-icon {
+        right: 1rem;
+    }
+
+    .projects-main-container {
+        padding-top: 6rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
+    .portfolio-card {
+        width: 100%;
+    }
+
+    .portfolio-card .project-thumb {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+/* ============================================================
+   PROJECTS SECTION — MATCH ABOUT SECTION DARK BACKGROUND
+   ============================================================ */
+.projects-accordion-section {
+    width: 100vw;
+    max-width: none;
+    margin: 0;
+    margin-left: calc(-50vw + 50%);
+    padding: 6rem 0 5rem;
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.projects-header-block {
+    text-align: center;
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.projects-main-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    font-style: italic;
+}
+
+.projects-subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.85rem, 1.4vw, 1rem);
+    color: #d0d0d0;
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.accordion-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-top: 2px solid #ffffff;
+}
+
+.accordion-item {
+    border-bottom: 2px solid #ffffff;
+}
+
+.accordion-header {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    color: #ffffff;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.accordion-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+}
+
+.accordion-icon {
+    position: absolute;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accordion-body {
+    padding: 0.5rem 1rem 3rem;
+}
+
+/* Project cards inside accordion — dark themed */
+.accordion-body .project-card {
+    background: var(--surface, #141414);
+    color: var(--text, #f0f0f0);
+}
+
+.accordion-body .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.resume-button-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 3.5rem;
+}
+
+.resume-btn {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    border: 1.5px solid #ffffff;
+    background: #ffffff;
+    color: #111111;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.resume-btn:hover {
+    background: #f0f0f0;
+    color: #111111;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+}
+
+/* Standalone projects.html page body */
+.projects-page-body {
+    background: #ffffff;
+    color: #111111;
+    min-height: 100vh;
+}
+
+.projects-main-container {
+    padding-top: 8rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.projects-page-body .resume-btn {
+    background: #111111;
+    border-color: #111111;
+    color: #ffffff;
+}
+
+.projects-page-body .resume-btn:hover {
+    background: #2a2a2a;
+    border-color: #2a2a2a;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Nav Pills Style */
+.nav-pills {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.nav-pill-btn {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.45rem 1.4rem;
+    border-radius: 9999px;
+    border: 1.5px solid #111111;
+    color: #111111;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-pill-btn:hover,
+.nav-pill-btn.active {
+    background: #111111;
+    color: #ffffff;
+}
+
+/* ============================================================
+   DISABLE TEXT SELECTION, CARET & I-BEAM CURSOR
+   ============================================================ */
+
+/* Disable text selection globally */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+a,
+button,
+li {
+    -webkit-user-select: none;
+    /* Chrome / Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE / Edge */
+    user-select: none;
+
+    -webkit-touch-callout: none;
+    /* Disable iOS long-press menu */
+    caret-color: transparent;
+    /* Hide blinking text caret */
+}
+
+/* Prevent I-beam text cursor */
+body {
+    cursor: default;
+}
+
+/* Keep links and buttons clickable with pointer cursor */
+a,
+button,
+.accordion-header,
+.project-card,
+.nav-pill-btn,
+.resume-btn,
+.draggable-item {
+    cursor: pointer;
+}
+
+/* Optional: prevent image dragging */
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+}
