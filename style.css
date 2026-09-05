@@ -979,6 +979,34 @@ body {
     cursor: default;
 }
 
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .nav-links,
+    .nav-pills {
+        gap: 0.75rem;
+    }
+
+    .nav-pill-btn {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .projects-main-container {
+        padding: 6rem 1rem 0;
+    }
+
+    .projects-main-title {
+        font-size: clamp(1.8rem, 10vw, 2.8rem);
+    }
+
+    .projects-subtitle {
+        padding: 0 0.5rem;
+    }
+}
+
 /* Keep links and buttons clickable with pointer cursor */
 a,
 button,
